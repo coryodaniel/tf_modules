@@ -9,3 +9,7 @@ output "firehose_name" {
 output "bucket_arn" {
   value = "${aws_s3_bucket.instance.arn}"
 }
+
+output "bucket_id" {
+  value = "${aws_s3_bucket.instance.id}"
+}
