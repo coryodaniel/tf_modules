@@ -1,5 +1,9 @@
 resource "aws_kinesis_firehose_delivery_stream" "instance" {
-  depends_on = ["aws_iam_role.instance"]
+  depends_on = ["aws_iam_role.instance",
+                "aws_s3_bucket.instance",
+                "aws_cloudwatch_log_group.instance",
+                "aws_cloudwatch_log_stream.instance"]
+
   name        = "${var.firehose_name}"
   destination = "s3"
 
