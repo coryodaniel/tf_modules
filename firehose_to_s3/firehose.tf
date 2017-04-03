@@ -1,10 +1,10 @@
 resource "aws_kinesis_firehose_delivery_stream" "instance" {
-  depends_on = ["aws_iam_role.s3_firehose"]
+  depends_on = ["aws_iam_role.instance"]
   name        = "${var.firehose_name}"
   destination = "s3"
 
   s3_configuration {
-    role_arn        = "${aws_iam_role.s3_firehose.arn}"
+    role_arn        = "${aws_iam_role.instance.arn}"
     bucket_arn      = "${aws_s3_bucket.instance.arn}"
     buffer_size     = "${var.buffer_size}"
     buffer_interval = "${var.buffer_interval}"

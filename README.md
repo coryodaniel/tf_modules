@@ -8,7 +8,7 @@
 This module will create:
 * Kinesis Firehose
 * Private S3 Bucket, logging enabled
-*
+* IAM roles and policies for writing to S3
 
 ### Usage
 

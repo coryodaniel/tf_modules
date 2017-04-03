@@ -28,5 +28,5 @@ EOF
 resource "aws_iam_role_policy_attachment" "firehose_writer-attach" {
   depends_on = ["aws_iam_policy.instance"]
   role       = "${var.role_name}"
-  policy_arn = "${aws_iam_policy.firehose_writer.arn}"
+  policy_arn = "${aws_iam_policy.instance.arn}"
 }
