@@ -38,3 +38,14 @@ module "firehose_writer" {
   firehose_arn = "${module.firehose_to_s3.firehose_arn}"
 }
 ```
+
+## Lambda-Kinesis execution role
+
+[lambda_kinesis_execution_role](./lambda_kinesis_execution_role/) configures role for  Amazon Kinesis Streams actions, and CloudWatch Logs actions. Useful for Lambda functions that process Amazon Kinesis stream events.
+
+```hcl
+module "lambda_assume_role" {
+  source = "github.com/coryodaniel/tf_modules//lambda_assume_role"
+  role_name_prefix = "${var.app_name}_${var.env}"
+}
+```
