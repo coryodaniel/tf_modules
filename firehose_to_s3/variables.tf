@@ -10,6 +10,11 @@ variable "bucket_name" {
   description = "S3 bucket name to be created"
 }
 
+variable "force_destroy_bucket" {
+  description = "Force destroy the bucket on `terraform destroy`. Objects not recoverable"
+  default = false
+}
+
 variable "buffer_size" {
   description = "Firehose/S3 buffer size in MB (default 5 MB)"
   default = 5

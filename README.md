@@ -18,6 +18,7 @@ module "firehose_to_s3" {
   account_id      = "your-account-id"
   firehose_name   = "my_name"
   bucket_name     = "my_bucket"
+  force_destroy_bucket = false
   buffer_size     = 5
   buffer_interval = 300
 }
