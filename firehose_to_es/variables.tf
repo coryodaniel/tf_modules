@@ -55,5 +55,11 @@ variable "rotation_period" {
 }
 
 variable "es_index_name" {}
-
+variable "ebs_volume_size" {
+  description = "The size of EBS volumes attached to data nodes."
+  default = "10"
+}
 variable "es_type_name" {}
+variable "access_policies" {
+  description = "IAM policy document specifying the access policies for the domain"
+}

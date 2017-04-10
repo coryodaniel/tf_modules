@@ -21,16 +21,48 @@ resource "aws_iam_role" "instance" {
 EOF
 }
 
+// Ref: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-es
 resource "aws_iam_policy" "instance" {
   depends_on = ["aws_s3_bucket.instance", "aws_cloudwatch_log_stream.instance"]
   name        = "${var.firehose_name}"
   path        = "/"
-  description = "S3 Write permissions for firehose: ${var.firehose_name}"
+  description = "ES Write permissions for firehose: ${var.firehose_name}"
 
   policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "es:DescribeElasticsearchDomain",
+        "es:DescribeElasticsearchDomains",
+        "es:DescribeElasticsearchDomainConfig",
+        "es:ESHttpPost",
+        "es:ESHttpPut"
+      ],
+      "Resource": [
+        "${aws_elasticsearch_domain.instance.arn}",
+        "${aws_elasticsearch_domain.instance.arn}/*"
+      ]
+    },
+
+    {
+      "Effect": "Allow",
+      "Action": [
+        "es:ESHttpGet"
+      ],
+      "Resource": [
+        "${aws_elasticsearch_domain.instance.arn}/_all/_settings",
+        "${aws_elasticsearch_domain.instance.arn}/_cluster/stats",
+        "${aws_elasticsearch_domain.instance.arn}/${var.es_index_name}*/_mapping/${var.es_type_name}",
+        "${aws_elasticsearch_domain.instance.arn}/_nodes",
+        "${aws_elasticsearch_domain.instance.arn}/_nodes/stats",
+        "${aws_elasticsearch_domain.instance.arn}/_nodes/*/stats",
+        "${aws_elasticsearch_domain.instance.arn}/_stats",
+        "${aws_elasticsearch_domain.instance.arn}/${var.es_index_name}*/_stats"
+      ]
+    },
     {
       "Effect": "Allow",
       "Action": [

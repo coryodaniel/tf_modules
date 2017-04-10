@@ -60,7 +60,7 @@ resource "aws_iam_policy" "instance" {
 EOF
 }
 
-resource "aws_iam_role_policy_attachment" "s3_writer-attach" {
+resource "aws_iam_role_policy_attachment" "instance-attach" {
   depends_on = ["aws_iam_role.instance"]
   role       = "${aws_iam_role.instance.name}"
   policy_arn = "${aws_iam_policy.instance.arn}"
