@@ -16,8 +16,8 @@ resource "aws_kinesis_firehose_delivery_stream" "instance" {
     index_name = "${var.es_index_name}"
     type_name  = "${var.es_type_name}"
 
-    buffer_size     = "${var.es_buffer_size}"
-    buffer_interval = "${var.es_buffer_interval}"
+    buffering_size     = "${var.es_buffer_size}"
+    buffering_interval = "${var.es_buffer_interval}"
 
     cloudwatch_logging_options {
       enabled = true
