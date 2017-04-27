@@ -63,3 +63,11 @@ variable "es_type_name" {}
 variable "access_policies" {
   description = "IAM policy document specifying the access policies for the domain"
 }
+
+variable "es_cluster_master_count" {
+  default = 0
+}
+
+variable "es_cluster_instance_count" {
+  default = 1
+}
